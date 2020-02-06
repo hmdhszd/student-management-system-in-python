@@ -244,8 +244,99 @@ rad5.grid(column=4, row=16)
 
 
 
-txt = scrolledtext.ScrolledText(window,width=120,height=25)
-txt.place(x=12, y=360)
+txt = scrolledtext.ScrolledText(window,width=60,height=25)
+txt.place(x=500, y=360)
+
+
+
+
+
+
+
+
+def CurSelet(evt):
+    how_many_courses = 0
+    total_of_notes = 0
+
+    value=str((listbox.get(ANCHOR)))
+    txt.delete('1.0', END)
+    
+
+    txt.insert(INSERT,'\nStudent ID:   ')
+    txt.insert(INSERT,value)
+    txt.insert(INSERT,'\n\nFirst name: ')
+    txt.insert(INSERT,allstudents[value][0])
+    txt.insert(INSERT,'     Last name: ')
+    txt.insert(INSERT,allstudents[value][1])
+    txt.insert(INSERT,'\n\n  Birthday: ')
+    txt.insert(INSERT,allstudents[value][2])
+    txt.insert(INSERT,'\n  Grade: ')
+    txt.insert(INSERT,allstudents[value][3])
+    txt.insert(INSERT,'\n\n  Scores: ')
+    
+    if allstudents[value][4][0]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][0])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     Art: ')
+        txt.insert(INSERT,allstudents[value][4][0])
+    
+    if allstudents[value][4][1]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][1])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     Mathematics: ')
+        txt.insert(INSERT,allstudents[value][4][1])
+    
+    if allstudents[value][4][2]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][2])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     Music: ')
+        txt.insert(INSERT,allstudents[value][4][2])
+    
+    if allstudents[value][4][3]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][3])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     Dance: ')
+        txt.insert(INSERT,allstudents[value][4][3])
+    
+    if allstudents[value][4][4]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][4])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     Physical Science: ')
+        txt.insert(INSERT,allstudents[value][4][4])
+    
+    if allstudents[value][4][5]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][5])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     EnglishLiterature: ')
+        txt.insert(INSERT,allstudents[value][4][5])
+    
+    if allstudents[value][4][6]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][6])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     Chemistry: ')
+        txt.insert(INSERT,allstudents[value][4][6])
+    
+    if allstudents[value][4][7]:
+        total_of_notes = total_of_notes + int(allstudents[value][4][7])
+        how_many_courses +=1
+        txt.insert(INSERT,'\n     French: ')
+        txt.insert(INSERT,allstudents[value][4][7])
+    txt.insert(INSERT,'\n\n          Total of the selected courses: ')
+    txt.insert(INSERT,how_many_courses)
+    txt.insert(INSERT,'\n\n          Average: ')
+    txt.insert(INSERT,(total_of_notes/how_many_courses))
+    
+    
+    
+    
+
+lbl = Label(window,text = "List of students :")
+lbl.place(x=15, y=340)
+listbox = Listbox(window,width=60,height=24)
+listbox.place(x=11, y=360)
+listbox.bind('<<ListboxSelect>>',CurSelet)
+
+
 
 
 
@@ -258,7 +349,9 @@ def clicked():
     sdate = selecteddate
     global ready_to_add
     ready_to_add = True
+    
     txt.delete('1.0', END)
+
 
     if stnametxt.get():
         pass
@@ -358,74 +451,15 @@ def clicked():
         newstid = x.strftime("%Y%m%d%S%f")
         allstudents[newstid] = (stnametxt.get(), stlnametxt.get(),sdate, v.get(), courselist)
         
-        for i in allstudents:
-            how_many_courses = 0
-            total_of_notes = 0
-            
-            txt.insert(INSERT,'\nStudent ID:   ')
-            txt.insert(INSERT,i)
-            txt.insert(INSERT,'\n\nFirst name: ')
-            txt.insert(INSERT,allstudents[i][0])
-            txt.insert(INSERT,'     Last name: ')
-            txt.insert(INSERT,allstudents[i][1])
-            txt.insert(INSERT,'\n\n  Birthday: ')
-            txt.insert(INSERT,allstudents[i][2])
-            txt.insert(INSERT,'\n  Grade: ')
-            txt.insert(INSERT,allstudents[i][3])
-            txt.insert(INSERT,'\n\n  Scores: ')
-            
-            if allstudents[i][4][0]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][0])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     Art: ')
-                txt.insert(INSERT,allstudents[i][4][0])
-            
-            if allstudents[i][4][1]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][1])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     Mathematics: ')
-                txt.insert(INSERT,allstudents[i][4][1])
-            
-            if allstudents[i][4][2]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][2])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     Music: ')
-                txt.insert(INSERT,allstudents[i][4][2])
-            
-            if allstudents[i][4][3]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][3])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     Dance: ')
-                txt.insert(INSERT,allstudents[i][4][3])
-            
-            if allstudents[i][4][4]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][4])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     Physical Science: ')
-                txt.insert(INSERT,allstudents[i][4][4])
-            
-            if allstudents[i][4][5]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][5])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     EnglishLiterature: ')
-                txt.insert(INSERT,allstudents[i][4][5])
-            
-            if allstudents[i][4][6]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][6])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     Chemistry: ')
-                txt.insert(INSERT,allstudents[i][4][6])
-            
-            if allstudents[i][4][7]:
-                total_of_notes = total_of_notes + int(allstudents[i][4][7])
-                how_many_courses +=1
-                txt.insert(INSERT,'\n     French: ')
-                txt.insert(INSERT,allstudents[i][4][7])
-            txt.insert(INSERT,'\n\n          Total of the selected courses: ')
-            txt.insert(INSERT,how_many_courses)
-            txt.insert(INSERT,'\n\n          Average: ')
-            txt.insert(INSERT,(total_of_notes/how_many_courses))
-            txt.insert(INSERT,'\n________________________________________________________________________________________________________________________\n')
+        
+        listbox.insert(END,newstid)
+
+
+
+
+
+
+
 
     
             
