@@ -10,6 +10,7 @@ from datetime import date
 from tkinter import messagebox
 from tkinter import scrolledtext
 import datetime
+import xlsxwriter
 
 
 
@@ -344,6 +345,19 @@ listbox.bind('<<ListboxSelect>>',CurSelet)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 def clicked():
     global sdate
     sdate = selecteddate
@@ -452,7 +466,52 @@ def clicked():
         allstudents[newstid] = (stnametxt.get(), stlnametxt.get(),sdate, v.get(), courselist)
         
         
+        #Add to ListBox
         listbox.insert(END,newstid)
+        
+        
+        
+        #Add to excel file
+        workbook = xlsxwriter.Workbook('DB.xlsx')
+        worksheet = workbook.add_worksheet()
+        worksheet.set_column('A:A', 20)
+        worksheet.set_column('B:Z', 30)
+        worksheet.write(0, 0, "Student ID :")
+        worksheet.write(1, 0, "First Name :")
+        worksheet.write(2, 0, "Last Name :")
+        worksheet.write(3, 0, "Birthdate (Age) :")
+        worksheet.write(4, 0, "Grade :")
+        worksheet.write(5, 0, "Art :")
+        worksheet.write(6, 0, "Mathematics :")
+        worksheet.write(7, 0, "Music :")
+        worksheet.write(8, 0, "Dance :")
+        worksheet.write(9, 0, "Physical Science :")
+        worksheet.write(10, 0, "English Literature :")
+        worksheet.write(11, 0, "Chemistry :")
+        worksheet.write(12, 0, "French :")
+
+
+        col_num = 1
+        for itemmm in allstudents:
+            worksheet.write(0, col_num, str(itemmm))
+            worksheet.write(1, col_num, str(allstudents[itemmm][0]))
+            worksheet.write(2, col_num, str(allstudents[itemmm][1]))
+            worksheet.write(3, col_num, str(allstudents[itemmm][2]))
+            worksheet.write(4, col_num, str(allstudents[itemmm][3]))
+            worksheet.write(5, col_num, str(allstudents[itemmm][4][0]))
+            worksheet.write(6, col_num, str(allstudents[itemmm][4][1]))
+            worksheet.write(7, col_num, str(allstudents[itemmm][4][2]))
+            worksheet.write(8, col_num, str(allstudents[itemmm][4][3]))
+            worksheet.write(9, col_num, str(allstudents[itemmm][4][4]))
+            worksheet.write(10, col_num, str(allstudents[itemmm][4][5]))
+            worksheet.write(11, col_num, str(allstudents[itemmm][4][6]))
+            worksheet.write(12, col_num, str(allstudents[itemmm][4][7]))
+            col_num += 1
+        
+        
+        
+        workbook.close()
+        
 
 
 
